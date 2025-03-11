@@ -1,0 +1,126 @@
+﻿Software Requirements Specification (SRS) Document
+Weather App
+1. Introduction
+1.1 Purpose
+The Weather App aims to provide users with real-time weather updates, forecasts, and severe weather alerts. The app will be built using React Native and will integrate third-party weather APIs to deliver accurate weather data to users on iOS and Android platforms.
+1.2 Document Overview
+This document outlines the functional and non-functional requirements, system architecture, and implementation plan for the Weather App.
+1.3 Scope
+* Provide real-time weather updates based on the user’s location.
+* Display hourly & weekly forecasts.
+* Send severe weather alerts for storms, extreme heat, or heavy rainfall.
+* Support multiple locations for users to check the weather in different places.
+* Allow users to set weather notifications.
+* Implement dark mode for better user experience.
+* Deploy on iOS & Android platforms.
+1.4 Stakeholders
+* End Users: Individuals using the app for weather updates.
+* Developers: Software engineers responsible for coding and maintaining the app.
+* Product Owners: Decision-makers ensuring the app aligns with business goals.
+* Third-Party API Providers: Services providing real-time weather data.
+________________
+
+
+2. Functional Requirements
+ID
+	Requirement
+	Priority
+	FR-01
+	The app must fetch real-time weather data based on GPS location.
+	High
+	FR-02
+	Users must be able to search and save multiple locations.
+	High
+	FR-03
+	The app must display a 7-day forecast for selected locations.
+	High
+	FR-04
+	Users should receive severe weather alerts via push notifications.
+	High
+	FR-05
+	Implement dark mode for improved UI accessibility.
+	Medium
+	FR-06
+	The app must support both metric (°C) and imperial (°F) units.
+	Medium
+	FR-07
+	Users should be able to share weather updates via social media.
+	Low
+	________________
+
+
+3. Non-Functional Requirements
+ID
+	Requirement
+	Priority
+	NFR-01
+	The app must respond within 2 seconds for API calls.
+	High
+	NFR-02
+	The UI should be intuitive and easy to navigate.
+	High
+	NFR-03
+	The system must be scalable to support millions of users.
+	Medium
+	NFR-04
+	The app must be secure with encrypted API keys.
+	High
+	NFR-05
+	Ensure compatibility with Android 8+ and iOS 13+.
+	High
+	________________
+
+
+4. System Architecture
+4.1 High-Level Architecture
+The system consists of the following components:
+* Frontend: React Native (UI for Android & iOS).
+* Backend: Node.js & Express.js (Handles API requests & push notifications).
+* Database: Firebase Firestore (Stores user preferences & location data).
+* Weather API: OpenWeatherMap / WeatherAPI (Provides real-time data).
+4.2 Data Flow
+1. The user opens the app, which requests location permissions.
+2. The frontend sends a request to the backend with the user’s location.
+3. The backend fetches weather data from the Weather API.
+4. The backend processes and sends data back to the frontend.
+5. The app displays weather conditions, forecasts, and alerts to the user.
+6. If severe weather is detected, the app sends push notifications.
+________________
+
+
+5. User Interface Design
+The UI will include:
+* Home Screen: Displays the current temperature, weather conditions, and location.
+* Forecast Screen: Shows hourly and 7-day weather predictions.
+* Settings: Allows users to set notification preferences and select temperature units.
+________________
+
+
+6. Constraints & Assumptions
+* The app requires an active internet connection for real-time weather updates.
+* GPS permissions must be granted to fetch location-based data.
+* The app should work in low-bandwidth conditions (data caching).
+________________
+
+
+7. Deployment & Maintenance
+7.1 Deployment Plan
+* Deploy backend services on AWS Lambda for scalability.
+* Publish app on Google Play Store and Apple App Store.
+7.2 Maintenance Plan
+* Regular API updates to ensure accurate data.
+* Bug fixes and performance improvements every two weeks.
+* Monitor user feedback and implement feature requests.
+________________
+
+
+8. Future Enhancements
+* AI-based weather predictions for more accurate forecasts.
+* Voice command integration (e.g., "Hey, what's the weather today?").
+* Offline mode for checking previously fetched weather data.
+* Wearable device support (e.g., Smartwatches).
+________________
+
+
+9. Conclusion
+This SRS document provides a detailed specification for the Weather App. The outlined features, system architecture, and development roadmap will ensure the app is functional, scalable, and user-friendly.
