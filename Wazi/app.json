@@ -4,7 +4,7 @@
     "slug": "Wazi",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/wazi.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -17,12 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/wazi.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/wazi.png"
     }
   }
 }
