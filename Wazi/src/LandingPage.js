@@ -1,14 +1,21 @@
 import React from 'react';
 import { TextInput, Dimensions } from 'react-native';
-import { Button } from 'react-native';
 import { SafeAreaView,StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { View, Text } from 'react-native';
 import logo from '../assets/wazi.png';
+//import Search from './search';
+
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Landing() {
+export default function Landing({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.logoView}>
@@ -16,9 +23,9 @@ export default function Landing() {
             </View>
             <View style={styles.input}>
                 <Text style={styles.titleText}>Please enter your City/Town</Text>
-                <TextInput style={styles.textInputComp}placeholder='Pretoria'></TextInput>
+                <TextInput style={styles.textInputComp}placeholder='Pretoria' onChangeText={()=>navigation.navigate('Search')}></TextInput>
             </View>
-            <TouchableOpacity style={styles.button} onPress={()=>{}}>
+            <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('Search')}>
                 <Text style={styles.buttonText}>Get Weather</Text>
             </TouchableOpacity>
             
