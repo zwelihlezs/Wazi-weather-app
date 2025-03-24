@@ -4,8 +4,8 @@ import { TouchableOpacity, Image, Dimensions } from 'react-native';
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 // import map from './map.js';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import icon from '../assets/wazi-icon1.png';
 import mapIcon from '../assets/gps.png';
@@ -22,26 +22,26 @@ const Stack = createNativeStackNavigator();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Search({navigation}) {
+export default function Search({ navigation }) {
     return (
         <SafeAreaView>
-            
-                <View>
-                    {/* Top Banner Component */}
-                    <TouchableOpacity style={styles.banner}
-                        onPress={() => { alert('ClicKeD') }}>
-                        <Image style={styles.icon} source={icon} />
 
-                        <Text style={{ marginRight: 5 }}>Menu</Text>
-                    </TouchableOpacity>
-                </View>
+            <View>
+                {/* Top Banner Component */}
+                <TouchableOpacity style={styles.banner}
+                    onPress={() => { alert('ClicKeD') }}>
+                    <Image style={styles.icon} source={icon} />
+
+                    <Text style={{ marginRight: 5 }}>Menu</Text>
+                </TouchableOpacity>
+            </View>
             <ScrollView>
                 <View>
                     {/* Search Component */}
                     <View style={styles.searchComp}>
                         <TextInput style={styles.searchInput} onChangeText={() => { }} value={'Pretoria'} />
-                        <TouchableOpacity style={{backgroundColor:'#f9f9f9'}} onPress={()=>navigation.navigate('Map')}>
-                        <Image style={styles.mapIcon} source={mapIcon}  />
+                        <TouchableOpacity style={{ backgroundColor: '#f9f9f9' }} onPress={() => navigation.navigate('Map')}>
+                            <Image style={styles.mapIcon} source={mapIcon} />
                         </TouchableOpacity>
                     </View>
 
@@ -160,9 +160,9 @@ export default function Search({navigation}) {
 
                     <View style={styles.citiesPreview}>
                         <View style={styles.cityPreview}>
-                            <Text style={{fontSize:15,color:'#363931'}}>Durban</Text>
-                            <Text style={{fontSize:22,color:'#ed281a'}}>29`c</Text>
-                            <Text style={{fontSize:16}}>Sunny</Text>
+                            <Text style={{ fontSize: 15, color: '#363931' }}>Durban</Text>
+                            <Text style={{ fontSize: 22, color: '#ed281a' }}>29`c</Text>
+                            <Text style={{ fontSize: 16 }}>Sunny</Text>
                         </View>
                     </View>
 
@@ -192,10 +192,10 @@ const styles = StyleSheet.create({
         width: windowWidth,
         top: 0,
         right: 0,
-        left:0,
+        left: 0,
         height: 36,
         backgroundColor: '#e7f0f1',
-        zIndex:1000,
+        zIndex: 1000,
     }
     ,
     searchComp: {
@@ -253,12 +253,12 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         paddingVertical: 5,
     },
-    cityPreview:{
-        backgroundColor:'rgba(18,180,181,0.8)',
+    cityPreview: {
+        backgroundColor: 'rgba(18,180,181,0.8)',
         margin: 4,
         padding: 5,
-        width: windowWidth /4,
-        
+        width: windowWidth / 4,
+
     },
 
 
