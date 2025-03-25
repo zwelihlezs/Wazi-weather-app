@@ -39,13 +39,13 @@ export default function Search({ navigation }) {
                 <View>
                     {/* Search Component */}
                     <View style={styles.searchComp}>
-                        <TextInput style={styles.searchInput} onChangeText={() => { }} value={'Pretoria'} />
+                        <TextInput style={styles.searchInput} value={'Pretoria'} />
                         <TouchableOpacity style={{ backgroundColor: '#f9f9f9' }} onPress={() => navigation.navigate('Map')}>
                             <Image style={styles.mapIcon} source={mapIcon} />
                         </TouchableOpacity>
                     </View>
 
-
+                    {/* Search result group1 */}
                     <View style={styles.cityResults}>
                         <View style={styles.cityTime}>
                             <Text style={{ color: '#363931', fontSize: 22 }}>{'Pretoria'}</Text>
@@ -70,37 +70,37 @@ export default function Search({ navigation }) {
                         <View style={styles.forecast}>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>06:00</Text>
-                                <Text style={{ color: 'ed281a' }}>25`c</Text>
+                                <Text style={{ color: '#ed281a' }}>25`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={pc} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 16km wind</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>07:00</Text>
-                                <Text style={{ color: 'ed281a' }}>30`c</Text>
+                                <Text style={{ color: '#ed281a' }}>30`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={sun} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 13km wind</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>08:00</Text>
-                                <Text style={{ color: 'ed281a' }}>20`c</Text>
+                                <Text style={{ color: '#ed281a' }}>20`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={cloud} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 24km wind</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>09:00</Text>
-                                <Text style={{ color: 'ed281a' }}>19`c</Text>
+                                <Text style={{ color: '#ed281a' }}>19`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={storm} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 21km wind</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>10:00</Text>
-                                <Text style={{ color: 'ed281a' }}>23`c</Text>
+                                <Text style={{ color: '#ed281a' }}>23`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={rain} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 26km wind</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>11:00</Text>
-                                <Text style={{ color: 'ed281a' }}>29`c</Text>
+                                <Text style={{ color: '#ed281a' }}>29`c</Text>
                                 <Image style={{ width: 35, height: 35 }} source={windy} />
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 18km wind</Text>
                             </View>
@@ -111,47 +111,49 @@ export default function Search({ navigation }) {
                         <View >
                             <Text style={{ color: '#363931', fontSize: 16 }}>Pretoria</Text>
                         </View>
+
+                        {/* Search results group2 */}
                         <View style={styles.cityResults1}>
 
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Sun</Text>
                                 <Image style={{ width: 35, height: 35 }} source={pc} />
-                                <Text style={{ color: 'ed281a' }}>25`c</Text>
+                                <Text style={{ color: '#ed281a' }}>25`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 16km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>34% Humid</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Mon</Text>
                                 <Image style={{ width: 35, height: 35 }} source={sun} />
-                                <Text style={{ color: 'ed281a' }}>30`c</Text>
+                                <Text style={{ color: '#ed281a' }}>30`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 13km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>56% Humid</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Tue</Text>
                                 <Image style={{ width: 35, height: 35 }} source={cloud} />
-                                <Text style={{ color: 'ed281a' }}>20`c</Text>
+                                <Text style={{ color: '#ed281a' }}>20`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 24km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>75% Humid</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Wed</Text>
                                 <Image style={{ width: 35, height: 35 }} source={storm} />
-                                <Text style={{ color: 'ed281a' }}>19`c</Text>
+                                <Text style={{ color: '#ed281a' }}>19`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 21km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>88% Humid</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Thur</Text>
                                 <Image style={{ width: 35, height: 35 }} source={rain} />
-                                <Text style={{ color: 'ed281a' }}>23`c</Text>
+                                <Text style={{ color: '#ed281a' }}>23`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 26km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>65% Humid</Text>
                             </View>
                             <View style={styles.hourlyForecast}>
                                 <Text style={{ color: '#363931' }}>Fri</Text>
                                 <Image style={{ width: 35, height: 35 }} source={windy} />
-                                <Text style={{ color: 'ed281a' }}>29`c</Text>
+                                <Text style={{ color: '#ed281a' }}>29`c</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>W 18km wind</Text>
                                 <Text style={{ color: '#363931', alignItems: 'center', }}>58% Humid</Text>
                             </View>
@@ -160,9 +162,9 @@ export default function Search({ navigation }) {
 
                     <View style={styles.citiesPreview}>
                         <View style={styles.cityPreview}>
-                            <Text style={{ fontSize: 15, color: '#363931' }}>Durban</Text>
-                            <Text style={{ fontSize: 22, color: '#ed281a' }}>29`c</Text>
-                            <Text style={{ fontSize: 16 }}>Sunny</Text>
+                            <Text style={{ fontSize: windowWidth/15, color: '#363931' }}>Durban</Text>
+                            <Text style={{ fontSize: windowWidth/17, color: '#ed281a' }}>29`c</Text>
+                            <Text style={{ fontSize: windowWidth/15 }}>Sunny</Text>
                         </View>
                     </View>
 
@@ -176,13 +178,13 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#f9f9f9',
         alignItems: 'center',
         justifyContent: 'center',
     },
     icon: {
-        height: 35,
-        width: 68
+        height: windowWidth/11,
+        width: windowHeight/10
     },
     banner: {
         position: 'absolute',
@@ -193,39 +195,41 @@ const styles = StyleSheet.create({
         top: 0,
         right: 0,
         left: 0,
-        height: 36,
+        height: 40,
         backgroundColor: '#e7f0f1',
         zIndex: 1000,
     }
     ,
     searchComp: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         marginTop: 50,
         padding: 1,
     },
     searchInput: {
-        borderRadius: 21,
+        borderRadius: 19,
         borderWidth: 1,
         // borderEndColor: '#e7f0f1',
         color: '#363931',
         backgroundColor: 'rgba(49,229,217,0.3)',
         width: windowWidth - (windowWidth / 6),
-        paddingStart: 10,
+        padding: 10,
     },
     mapIcon: {
         height: 35,
         width: 35,
-        margin: 4
+        margin: 5,
+        
     },
     cityResults: {
-
+        height: windowHeight/2,
         backgroundColor: 'rgba(0,184,241,0.3)',
         margin: 5,
         padding: 8,
         borderRadius: 11,
     },
     cityResults1: {
+        height:windowHeight/2.4,
         flexDirection: 'row',
         // backgroundColor: 'rgba(0,184,241,0.3)',
         margin: 5,
@@ -257,8 +261,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(18,180,181,0.8)',
         margin: 4,
         padding: 5,
-        width: windowWidth / 4,
-
+        width: windowWidth / 3.5,
+        height:windowWidth/3.5,
+        
     },
 
 
