@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput } from 'react-native';
-import { TouchableOpacity, Image, Dimensions } from 'react-native';
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
-// import map from './map.js';
+import { TouchableOpacity, Image, Dimensions, FlatList } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ActivityIndicator } from 'react-native';
+import searchIcon from '../assets/search-icons.png';
+import { fetchData, getWeather } from './components/searchComp';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import icon from '../assets/wazi-icon1.png';
@@ -16,6 +17,9 @@ import cloud from '../assets/condition/cloud.png';
 import windy from '../assets/condition/windy.png';
 import storm from '../assets/condition/storm.png';
 import { ScrollView } from 'react-native';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -23,23 +27,61 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function Search({ navigation }) {
+
+    var measures = ["\u2103", "\u2109"]
+    var fahr = measures[1];
+    var celcius = measures[0];
+
+    const route = useRoute();
+    const { fetchedData } = route.params;
+
+    var [myCity, setCity ] = useState("Pretoria");
+    function changeCity(value){ //get input and set it to 'city' var
+        setCity(myCity = value);
+    }
+
+    var [loading, setLoading]= useState(false);
+
+    const [data, setData] = useState(fetchedData);
+
+  const changedata = async () => {
+    setLoading(true);
+    try {
+      const response = await getWeather(myCity);
+      setData(response); // ✅ Updates local state
+    } catch (error) {
+      console.error('Failed to refetch:', error);
+    }
+    finally{
+        console.log('NEW Data SuCcEsS....')
+        setLoading(false);
+    }
+  };
+
+
+
     return (
         <SafeAreaView>
-
-            <View>
-                {/* Top Banner Component */}
-                <TouchableOpacity style={styles.banner}
-                    onPress={() => { alert('ClicKeD') }}>
-                    <Image style={styles.icon} source={icon} />
-
-                    <Text style={{ marginRight: 5 }}>Menu</Text>
-                </TouchableOpacity>
-            </View>
             <ScrollView>
+                <View>
+                    {/* Top Banner Component */}
+                    <TouchableOpacity style={styles.banner}
+                        onPress={() => navigation.navigate('Settings')}>
+                        <Image style={styles.icon} source={icon} />
+
+                        <Text style={{ marginRight: 5 }}>Menu</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <View>
                     {/* Search Component */}
                     <View style={styles.searchComp}>
-                        <TextInput style={styles.searchInput} value={'Pretoria'} />
+                        <View style={styles.searchInput}>
+                            <TextInput placeholder={data.location.name} onChangeText={(v) => changeCity(v)}/>
+                            {loading? <ActivityIndicator color="#00b8f1" size={'large'}/> :<TouchableOpacity style={{ }} onPress={() => changedata()}>
+                                <Image style={styles.searchIcon} source={searchIcon} />
+                            </TouchableOpacity>}
+                        </View>
                         <TouchableOpacity style={{ backgroundColor: '#f9f9f9' }} onPress={() => navigation.navigate('Map')}>
                             <Image style={styles.mapIcon} source={mapIcon} />
                         </TouchableOpacity>
@@ -48,68 +90,54 @@ export default function Search({ navigation }) {
                     {/* Search result group1 */}
                     <View style={styles.cityResults}>
                         <View style={styles.cityTime}>
-                            <Text style={{ color: '#363931', fontSize: 22 }}>{'Pretoria'}</Text>
-                            <Text style={styles.timeText}>{'22 mar, Sat'}</Text>
+
+                            <Text style={{ color: '#363931', fontSize: 22 }}>{data.location.name}</Text>
+                            {/* {console.log(data)} */}
+                            <Text style={styles.timeText}>{data.location.localtime}</Text>
                         </View>
                         <View style={styles.cityInfo}>
                             <View>
-                                <Image style={{ width: windowWidth / 3.7, height: 70 }} source={pc} />
+                                <Image style={{ width: windowWidth / 3.9, height: 90 }} source={{ uri: `https:${data.current.condition.icon}` }} />
                             </View>
                             <View>
-                                <Text style={{ color: '#ed281a', fontSize: 48, padding: 5, }}>21`c</Text>
+                                <Text style={{ color: '#ed281a', fontSize: 48, padding: 5, }}>{data.current.temp_c}{celcius}</Text>
                             </View>
                             <View style={styles.cityConditions}>
-                                <Text style={{ color: '#363931', fontSize: 16 }}>Light Rain</Text>
-                                <Text style={{ color: '#363931', fontSize: 16 }}>NW 15 km winds</Text>
-                                <Text style={{ color: '#363931', fontSize: 16 }}>66% Humidity</Text>
+                                <Text style={{ color: '#363931', fontSize: 16 }}>{data.current.condition.text}</Text>
+                                <Text style={{ color: '#363931', fontSize: 16, padding:2 }}>{data.current.wind_dir} {data.current.wind_kph}km wind</Text>
+                                <Text style={{ color: '#363931', fontSize: 16 }}>{data.current.humidity}% humidity</Text>
+                                
                             </View>
                         </View>
+
+                        {/*hourlyForecast*/}
                         <View>
                             <Text style={{ color: '#363931', fontSize: 18 }}>Today</Text>
                         </View>
-                        <View style={styles.forecast}>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>06:00</Text>
-                                <Text style={{ color: '#ed281a' }}>25`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={pc} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 16km wind</Text>
-                            </View>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>07:00</Text>
-                                <Text style={{ color: '#ed281a' }}>30`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={sun} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 13km wind</Text>
-                            </View>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>08:00</Text>
-                                <Text style={{ color: '#ed281a' }}>20`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={cloud} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 24km wind</Text>
-                            </View>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>09:00</Text>
-                                <Text style={{ color: '#ed281a' }}>19`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={storm} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 21km wind</Text>
-                            </View>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>10:00</Text>
-                                <Text style={{ color: '#ed281a' }}>23`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={rain} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 26km wind</Text>
-                            </View>
-                            <View style={styles.hourlyForecast}>
-                                <Text style={{ color: '#363931' }}>11:00</Text>
-                                <Text style={{ color: '#ed281a' }}>29`c</Text>
-                                <Image style={{ width: 35, height: 35 }} source={windy} />
-                                <Text style={{ color: '#363931', alignItems: 'center', }}>W 18km wind</Text>
-                            </View>
-                        </View>
+                        <FlatList
+                        showsHorizontalScrollIndicator= {false}
+                            horizontal={true}
+                            data={data.forecast.forecastday[0].hour}
+                            renderItem={({ item }) =>
+                            (
+                                <View style={styles.forecast}>
+                                    <View style={styles.hourlyForecast}>
+                                        <Text style={{ color: '#363931', }}>{Array.from(item.time).slice(11,16)}</Text>
+                                        <Text style={{ color: '#ed281a', fontSize: 20 }}>{item.temp_c}{celcius}</Text>
+                                        <Image style={{ width: 55, height: 55 }} source={{ uri: `https:${item.condition.icon}` }} />
+                                        <Text style={{ color: '#363931', alignItems: 'center', }}>{item.wind_dir}{item.wind_kph}km wind</Text>
+                                        <Text style={{color:'#363931', alignItems: 'center'}}>{item.humidity}% humidity</Text>
+                                        <Text style={{ color: '#363931'}} >{item.chance_of_rain}% rain</Text>
+                                    </View>
+
+                                </View>)}
+                            keyExtractor={item => item.time_epoch}
+                        />
                     </View>
 
                     <View style={{ padding: 4, backgroundColor: 'rgba(0,184,241,0.3)', borderRadius: 14, margin: 4 }}>
                         <View >
-                            <Text style={{ color: '#363931', fontSize: 16 }}>Pretoria</Text>
+                            <Text style={{ color: '#363931', fontSize: 16 }}>{data.location.name}</Text>
                         </View>
 
                         {/* Search results group2 */}
@@ -162,9 +190,9 @@ export default function Search({ navigation }) {
 
                     <View style={styles.citiesPreview}>
                         <View style={styles.cityPreview}>
-                            <Text style={{ fontSize: windowWidth/15, color: '#363931' }}>Durban</Text>
-                            <Text style={{ fontSize: windowWidth/17, color: '#ed281a' }}>29`c</Text>
-                            <Text style={{ fontSize: windowWidth/15 }}>Sunny</Text>
+                            <Text style={{ fontSize: windowWidth / 15, color: '#363931' }}>Durban</Text>
+                            <Text style={{ fontSize: windowWidth / 17, color: '#ed281a' }}>29`c</Text>
+                            <Text style={{ fontSize: windowWidth / 15 }}>Sunny</Text>
                         </View>
                     </View>
 
@@ -182,9 +210,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    searchIcon:{
+        height: windowWidth / 11,
+        width: windowHeight / 18,
+        // borderWidth:0.1,
+        borderTopColor: 'green'
+    },
     icon: {
-        height: windowWidth/11,
-        width: windowHeight/10
+        height: windowWidth / 11,
+        width: windowHeight / 10
     },
     banner: {
         position: 'absolute',
@@ -205,31 +240,41 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 50,
         padding: 1,
+        
     },
     searchInput: {
+        // position: 'absolute',
+        // alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+
         borderRadius: 19,
-        borderWidth: 1,
-        // borderEndColor: '#e7f0f1',
+        
+        
         color: '#363931',
-        backgroundColor: 'rgba(49,229,217,0.3)',
-        width: windowWidth - (windowWidth / 6),
+        backgroundColor: '#31e5d9',
+        width: windowWidth - (windowWidth /5),
         padding: 10,
     },
     mapIcon: {
         height: 35,
         width: 35,
         margin: 5,
-        
+
+    },
+    cityConditions:{
+        borderWidth: 1,
+        padding:9
     },
     cityResults: {
-        height: windowHeight/2,
-        backgroundColor: 'rgba(0,184,241,0.3)',
+        // height: windowHeight / 2,
+        backgroundColor: '#31e5d9',
         margin: 5,
         padding: 8,
         borderRadius: 11,
     },
     cityResults1: {
-        height:windowHeight/2.4,
+        height: windowHeight / 2.4,
         flexDirection: 'row',
         // backgroundColor: 'rgba(0,184,241,0.3)',
         margin: 5,
@@ -241,20 +286,25 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     cityInfo: {
+        width: windowHeight/4,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 10,
         paddingHorizontal: 5,
+        marginRight:5
     },
     forecast: {
         flexDirection: 'row',
     },
     hourlyForecast: {
-        width: 56,
-        borderWidth: 1,
-        borderColor: 'rgba(0,214,204,0.1)',
+        width: windowWidth /4,
+        // height: windowHeight/4,
+        borderRadius:8,
+        // borderWidth: 1,
+        backgroundColor: '#00b8f1',
         alignItems: 'center',
         marginVertical: 5,
+        marginHorizontal:2,
         paddingVertical: 5,
     },
     cityPreview: {
@@ -262,8 +312,8 @@ const styles = StyleSheet.create({
         margin: 4,
         padding: 5,
         width: windowWidth / 3.5,
-        height:windowWidth/3.5,
-        
+        height: windowWidth / 3.5,
+
     },
 
 

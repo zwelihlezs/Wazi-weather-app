@@ -21,7 +21,7 @@ export default function MapSearch({navigation}) {
                 <View>
                     {/* Top Banner Component */}
                     <TouchableOpacity style={styles.banner}
-                        onPress={() => { alert('ClicKeD') }}>
+                        onPress={() => { navigation.navigate('Settings') }}>
                         <Image style={styles.icon} source={icon} />
 
                         <Text style={{ marginRight: 5 }}>Menu</Text>

@@ -1,10 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Landing from './src/LandingPage.js';
 import MapSearch from './src/map';
 import Search from './src/search';
+import Settings from './src/settings.js';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
         <Stack.Screen name="First Page" component={Landing} />
         <Stack.Screen name ="Search" component={Search}/>
         <Stack.Screen name ="Map" component={MapSearch}/>
-        
+        <Stack.Screen name="Settings" component={Settings}/>
 
       </Stack.Navigator>
 
